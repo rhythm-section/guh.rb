@@ -25,9 +25,8 @@ module HiveRpcWrapper
         
         c.puts(request_string)
         
-        end_of_response = false
-        
         while line = c.gets
+          puts "  ---> #{line}"
           response << line
         end
       end
