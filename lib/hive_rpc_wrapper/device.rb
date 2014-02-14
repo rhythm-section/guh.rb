@@ -1,14 +1,14 @@
 module HiveRpcWrapper
   class Device < Base
     
-    def configured
+    def self.configured
       get({
         id: generate_request_id,
         method: "Devices.GetConfiguredDevices"
       })
     end
     
-    def supported
+    def self.supported
       get({
         id: generate_request_id,
         method: "Devices.GetSupportedDevices"
