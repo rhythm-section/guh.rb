@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'rspec'
 
+
 require 'hive_rpc_wrapper'
 
 puts "\n\n---------------------------------------------------"
@@ -9,11 +10,13 @@ puts "---------------------------------------------------\n\n"
 
 
 def purge_devices
-  File.expand_path('~/.config/hiveyourhome/hive.conf')
+  path = File.expand_path('~/.config/hiveyourhome/hive.conf')
+  File.unlink(path) if File.exist?(path)
 end
 
 def purge_rules
-  File.expand_path('~/.config/hiveyourhome/rules.conf')
+  path = File.expand_path('~/.config/hiveyourhome/rules.conf')
+  File.unlink(path) if File.exist?(path)
 end
 
 def purge_configuration
