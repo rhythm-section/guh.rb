@@ -7,7 +7,7 @@ puts "\n\n---------------------------------------------------"
 puts "Please make sure that hive is running"
 puts "---------------------------------------------------\n\n"
 
-Rspec.configure do |config|
+RSpec.configure do |config|
   config.before(:all) do
     HiveRpcWrapper::Base.configure do |c|
       c.hive_ip_address = "0.0.0.0"
