@@ -3,39 +3,20 @@ require 'rspec'
 
 require 'hive_rpc_wrapper'
 
-require 'json'
-require 'socket'
-class FakeUnixSocketServer < TCPServer
-  
-  def initialize(port=1234)
-    super
-  end
-  
-  def run
-    STDOUT.write "[Server] #{self.addr}"
-    
-    @running = true
-    while @running do
-      client = self.accept       # Wait for a client to connect
-      
-      STDOUT.write "[Server] #{client.inspect}"
-      
-      request = client.gets
-      
-      if request.chop.downcase == "halt"
-        @running = false
-        STDOUT.write "[Server] Received 'halt' - Miller time!"
-        client.close
-      else
-        STDOUT.write "[Server] #{request}"
-        client.puts '[{"id": "foo"},'+"\n"+'{"id": "bar"}]'
-        client.close
-      end
-      
-      sleep 1/60
-    end
-  ensure
-    self.close
-  end
-  
+puts "\n\n---------------------------------------------------"
+puts "Please make sure that hive is running"
+puts "---------------------------------------------------\n\n"
+
+
+def purge_devices
+  File.expand_path('~/.config/hiveyourhome/hive.conf')
+end
+
+def purge_rules
+  File.expand_path('~/.config/hiveyourhome/rules.conf')
+end
+
+def purge_configuration
+  purge_devices()
+  purge_rules()
 end

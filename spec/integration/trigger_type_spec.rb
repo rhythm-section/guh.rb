@@ -2,31 +2,22 @@ require 'helper'
 
 describe HiveRpcWrapper::TriggerType do
   
-  def start_server
-    @thread = Thread.new do
-      socket_server = FakeUnixSocketServer.new
-      socket_server.run
-    end
-  end
-  
-  def stop_server
-    HiveRpcWrapper::Base.send("halt")
-  end
-  
-  it "should get something back" do
-    puts "before server"
-    start_server
-    puts "after server"
-    
+  before :all do
     HiveRpcWrapper::Base.configure do |c|
       c.hive_ip_address = "0.0.0.0"
       c.hive_port = 1234
     end
     
-    sleep 0.5
-    puts HiveRpcWrapper::TriggerType.all.inspect
+    # Remove all devices & rules from Hive Core
+    purge_configuration()
+  end
+  
+  it "should get something back" do
+    device = HiveRpcWrapper::Device.supported['params']['deviceClasses'].first
     
-    stop_server
+    response = HiveRpcWrapper::TriggerType.all(device['id'])
+    
+    response['status'].should eq('success')
   end
   
 end
