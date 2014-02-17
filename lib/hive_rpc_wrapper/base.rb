@@ -24,6 +24,21 @@ module HiveRpcWrapper
     
     ##
     # 
+    # Returns everything that is going on inside Hive Core
+    # 
+    # Example:
+    # 
+    #   HiveRpcWrapper::Base.introspect
+    # 
+    def self.introspect
+      get({
+        id: generate_request_id,
+        method: "JSONRPC.Introspect",
+      })
+    end
+    
+    ##
+    # 
     # <b>Don't use this unless you know what you are doing!</b>
     # 
     # Send a request to Hive Core and fetch the Response. This is a utility method used by the subclasses.
@@ -75,7 +90,7 @@ module HiveRpcWrapper
         # TODO raise connection error
       end
     ensure
-      client.close
+      client.close if client
     end
     
     def self.fetch_message(client)
