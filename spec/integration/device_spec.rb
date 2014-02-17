@@ -5,13 +5,13 @@ describe HiveRpcWrapper::Device do
   it "should get the supported device" do
     response = HiveRpcWrapper::Device.supported
     
-    response['status'].should eq('success')
+    response['params']['success'].should be_true
   end
   
   it "should get the configured device" do
     response = HiveRpcWrapper::Device.configured
     
-    response['status'].should eq('success')
+    response['params']['success'].should be_true
   end
   
   it "should tell us the number of configured devices" do
@@ -36,9 +36,19 @@ describe HiveRpcWrapper::Device do
       E: false
     })
     
-    response['status'].should eq('success')
+    response['params']['success'].should be_true
     
     HiveRpcWrapper::Device.count_configured.should eq(configured_count+1)
+  end
+  
+  it "should fail if we omit the params" do
+    configured_count = HiveRpcWrapper::Device.count_configured
+    
+    response = HiveRpcWrapper::Device.add("{308ae6e6-38b3-4b3a-a513-3199da2764f8}", {})
+    
+    response['params']['success'].should be_false
+    
+    HiveRpcWrapper::Device.count_configured.should eq(configured_count)
   end
   
 end

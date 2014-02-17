@@ -7,7 +7,7 @@ describe HiveRpcWrapper::TriggerType do
     # 
     # response = HiveRpcWrapper::TriggerType.all(device['id'])
     # 
-    # response['status'].should eq('success')
+    # response['params']['success'].should be_true
     pending("Comment this back in when the RPC/API supports it")
   end
   

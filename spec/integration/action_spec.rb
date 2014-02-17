@@ -18,7 +18,7 @@ describe HiveRpcWrapper::Action do
       D: false,
       E: false
     })
-    response['status'].should eq('success')
+    response['params']['success'].should be_true
     
     # Get the newly configured device
     @device = HiveRpcWrapper::Device.configured['params']['devices'].detect{|d| d['deviceClassId']==device_class_id}
@@ -26,7 +26,7 @@ describe HiveRpcWrapper::Action do
     
     # Get all the possible actions for the device
     response = HiveRpcWrapper::ActionType.all(device_class_id)
-    response['status'].should eq('success')
+    response['params']['success'].should be_true
     
     # Just use the first action
     @action = response['params']['actionTypes'].first
@@ -35,13 +35,13 @@ describe HiveRpcWrapper::Action do
   it "should execute a single action" do
     response = HiveRpcWrapper::Action.execute(@device['id'], @action['id'], {power: true})
     
-    response['status'].should eq('success')
+    response['params']['success'].should be_true
   end
   
   it 'should fail if the wrong params are provided' do
     # response = HiveRpcWrapper::Action.execute(@device['id'], @action['id'], {})
     # 
-    # response['status'].should eq('error')
+    # response['params']['success'].should be_false
     pending("Don't run this test until we know if the params are optional")
   end
   
