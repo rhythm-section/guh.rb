@@ -1,13 +1,23 @@
 require 'rubygems'
 require 'rspec'
 
-
 require 'hive_rpc_wrapper'
 
 puts "\n\n---------------------------------------------------"
 puts "Please make sure that hive is running"
 puts "---------------------------------------------------\n\n"
 
+Rspec.configure do |config|
+  config.before(:all) do
+    HiveRpcWrapper::Base.configure do |c|
+      c.hive_ip_address = "0.0.0.0"
+      c.hive_port = 1234
+    end
+    
+    # Remove all devices & rules from Hive Core
+    purge_configuration()
+  end
+end
 
 def purge_devices
   path = File.expand_path('~/.config/hiveyourhome/hive.conf')

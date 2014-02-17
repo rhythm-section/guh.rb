@@ -2,16 +2,6 @@ require 'helper'
 
 describe HiveRpcWrapper::Device do
   
-  before :all do
-    HiveRpcWrapper::Base.configure do |c|
-      c.hive_ip_address = "0.0.0.0"
-      c.hive_port = 1234
-    end
-    
-    # Remove all devices & rules from Hive Core
-    purge_configuration()
-  end
-  
   it "should get the supported device" do
     response = HiveRpcWrapper::Device.supported
     
