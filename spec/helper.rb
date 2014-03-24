@@ -33,3 +33,11 @@ def purge_configuration
   purge_devices()
   purge_rules()
 end
+
+def pj(data)
+  puts ""
+  puts "-"*15
+  puts data.inspect
+  puts "-"*15
+  puts ""
+end
