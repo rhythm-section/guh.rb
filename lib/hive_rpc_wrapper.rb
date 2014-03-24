@@ -14,4 +14,7 @@ require "hive_rpc_wrapper/event"
 
 module HiveRpcWrapper
   # Your code goes here...
+  
+  class ResponseError < Exception; end
+  
 end

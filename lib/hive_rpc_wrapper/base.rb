@@ -53,7 +53,11 @@ module HiveRpcWrapper
         response = fetch_message(c)
       end
       
-      return response
+      if response['status']=='success'
+        return response['params']
+      else
+        raise HiveRpcWrapper::ResponseError, "The Request was not successful"
+      end
     end
     
     ##
