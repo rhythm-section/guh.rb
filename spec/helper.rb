@@ -41,3 +41,11 @@ def pj(data)
   puts "-"*15
   puts ""
 end
+
+def create_configured_device(device_class_id, params)
+  # Create a device
+  response = HiveRpcWrapper::Device.add(device_class_id, params)
+  
+  # Get the newly configured device
+  return HiveRpcWrapper::Device.configured['params']['devices'].detect{|d| d['deviceClassId']==device_class_id}
+end
