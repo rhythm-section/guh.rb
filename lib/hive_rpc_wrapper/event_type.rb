@@ -1,21 +1,21 @@
 module HiveRpcWrapper
   ##
-  # This class wraps everything related to TriggerTypes.
+  # This class wraps everything related to EventTypes.
   # 
-  class TriggerType < Base
+  class EventType < Base
     
     ##
     # 
-    # Returns a list of all available TriggerTypes.
+    # Returns a list of all available EventTypes.
     # 
     # Example:
     # 
-    #   HiveRpcWrapper::TriggerType.all(device_class_id)
+    #   HiveRpcWrapper::EventType.all(device_class_id)
     # 
     def self.all(device_class_id)
       get({
         id: generate_request_id,
-        method: "Devices.GetTriggerTypes",
+        method: "Devices.GetEventTypes",
         params: {
           deviceClassId: device_class_id
         }
