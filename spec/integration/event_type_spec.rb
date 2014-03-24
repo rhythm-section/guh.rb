@@ -9,7 +9,7 @@ describe HiveRpcWrapper::EventType do
     # Get all the possible events for the device
     response = HiveRpcWrapper::EventType.all(device_class_id)
     
-    response['status'].should eq('success')
+    response.should be_an_instance_of(Array)
     
     pending "Right now we get empty responses for all events"
   end

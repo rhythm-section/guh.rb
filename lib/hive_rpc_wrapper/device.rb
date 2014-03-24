@@ -13,10 +13,12 @@ module HiveRpcWrapper
     #   HiveRpcWrapper::Device.configured
     # 
     def self.configured
-      get({
+      response = get({
         id: generate_request_id,
         method: "Devices.GetConfiguredDevices"
       })
+      
+      return response['devices']
     end
     
     ##
@@ -28,10 +30,12 @@ module HiveRpcWrapper
     #   HiveRpcWrapper::Device.supported
     # 
     def self.supported
-      get({
+      response = get({
         id: generate_request_id,
         method: "Devices.GetSupportedDevices"
       })
+      
+      return response['deviceClasses']
     end
     
     ##
@@ -81,7 +85,7 @@ module HiveRpcWrapper
     # Example: HiveRpcWrapper::Device.count_configured
     # 
     def self.count_configured
-      self.configured['params']['devices'].length
+      self.configured.length
     end
     
   end

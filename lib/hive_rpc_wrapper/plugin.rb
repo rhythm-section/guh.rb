@@ -13,10 +13,12 @@ module HiveRpcWrapper
     #   HiveRpcWrapper::Plugin.all
     # 
     def self.all
-      get({
+      response = get({
         id: generate_request_id,
         method: "Devices.GetPlugins"
       })
+      
+      response['plugins']
     end
     
   end

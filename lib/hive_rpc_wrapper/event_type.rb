@@ -13,13 +13,15 @@ module HiveRpcWrapper
     #   HiveRpcWrapper::EventType.all(device_class_id)
     # 
     def self.all(device_class_id)
-      get({
+      response = get({
         id: generate_request_id,
         method: "Devices.GetEventTypes",
         params: {
           deviceClassId: device_class_id
         }
       })
+      
+      response['eventTypes']
     end
     
   end
