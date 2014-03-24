@@ -13,10 +13,12 @@ module HiveRpcWrapper
     #   HiveRpcWrapper::Rule.all
     # 
     def self.all
-      get({
+      response = get({
         id: generate_request_id,
         method: "Rules.GetRules"
       })
+      
+      response['rules']
     end
     
     ##

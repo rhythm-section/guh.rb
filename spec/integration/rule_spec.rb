@@ -3,9 +3,10 @@ require 'helper'
 describe HiveRpcWrapper::Rule do
   
   before :all do
-    # Wifi Device
-    @sender = create_configured_device("{bd216356-f1ec-4324-9785-6982d2174e17}", {
-      mac: "00:11:22:33:44:55"
+    # Intertechno Remote
+    @sender = create_configured_device("{ab73ad2f-6594-45a3-9063-8f72d365c5e5}", {
+      familyCode: 'A',
+      buttonCode: 1
     })
     
     # Intertechno Switch
@@ -19,15 +20,15 @@ describe HiveRpcWrapper::Rule do
   it "should return a list of all rules" do
     response = HiveRpcWrapper::Rule.all
     
-    response['status'].should eq('success')
+    response.should be_an_instance_of(Array)
   end
   
   it "should create a new rule" do
     # TODO: remove ugly workaround
-    senderDeviceClass = HiveRpcWrapper::Device.supported['params']['deviceClasses'].detect{|d| d['id']==@sender['deviceClassId']}
+    senderDeviceClass = HiveRpcWrapper::Device.supported.detect{|d| d['id']==@sender['deviceClassId']}
     eventId = senderDeviceClass['events'].first['id']
     
-    actionId = HiveRpcWrapper::ActionType.all(@receiver['deviceClassId'])['params']['actionTypes'].first['id']
+    actionId = HiveRpcWrapper::ActionType.all(@receiver['deviceClassId']).first['id']
     
     event = {
       eventTypeId: eventId,
@@ -43,10 +44,12 @@ describe HiveRpcWrapper::Rule do
       }
     }
     
-    response = HiveRpcWrapper::Rule.add(event, action)
-    response['status'].should eq('success')
+    -> {
+      response = HiveRpcWrapper::Rule.add(event, action)
+    }.should_not raise_error
     
-    pj response
+    pending "How do we know we were successful?"
+    
   end
   
 end
