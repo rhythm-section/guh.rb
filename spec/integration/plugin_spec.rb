@@ -5,7 +5,7 @@ describe HiveRpcWrapper::Plugin do
   it "should return a list of all loaded plugins" do
     response = HiveRpcWrapper::Plugin.all
     
-    response['params']['success'].should be_true
+    response['status'].should eq('success')
   end
   
   it "should add params to the Plugin config" do
