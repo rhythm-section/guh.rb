@@ -16,5 +16,6 @@ module Guh
   # Your code goes here...
   
   class ResponseError < Exception; end
+  class ArgumentError < Exception; end
   
 end

@@ -40,7 +40,7 @@ module Guh
     
     ##
     # 
-    # Returns a list of all supported Devices.
+    # Creates a configured device and returns it's ID.
     # 
     # Example for the "Elro Power Switch":
     # 
@@ -50,15 +50,15 @@ module Guh
     #     channel3: false,
     #     channel4: false,
     #     channel5: false,
-    #     A: true,
-    #     B: false,
-    #     C: false,
-    #     D: false,
-    #     E: false
+    #     channel6: true,
+    #     channel7: false,
+    #     channel8: false,
+    #     channel9: false,
+    #     channel10: false
     #   })
     # 
     def self.add(device_class_id, params)
-      get({
+      response = get({
         id: generate_request_id,
         method: "Devices.AddConfiguredDevice",
         params: {
@@ -66,6 +66,11 @@ module Guh
           deviceParams: params
         }
       })
+      if response['success']==false
+        raise Guh::ArgumentError, response['errorMessage']
+      else
+        return response['deviceId']
+      end
     end
     
     ##

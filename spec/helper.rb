@@ -44,8 +44,8 @@ end
 
 def create_configured_device(device_class_id, params)
   # Create a device
-  response = Guh::Device.add(device_class_id, params)
+  device_id = Guh::Device.add(device_class_id, params)
   
   # Get the newly configured device
-  return Guh::Device.configured.detect{|d| d['deviceClassId']==device_class_id}
+  return Guh::Device.configured.detect{|d| d['id']==device_id}
 end
