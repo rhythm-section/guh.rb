@@ -87,12 +87,18 @@ module Guh
     
     def self.client(&block)
       client = TCPSocket.open(@@guh_ip_address, @@guh_port)
-      connection_message = fetch_message(client)
-      if connection_message['status']=='connected'
-        yield client
-      else
-        # TODO raise connection error
-      end
+      
+      # workaround until we get the welcome message back
+      yield client
+      
+      # connection_message = fetch_message(client)
+      # 
+      # if connection_message['status']=='connected'
+      #   
+      #   yield client
+      # else
+      #   # TODO raise connection error
+      # end
     ensure
       client.close if client
     end
