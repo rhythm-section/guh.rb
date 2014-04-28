@@ -5,8 +5,7 @@ describe Guh::Rule do
   before :all do
     # Intertechno Remote
     @sender = create_configured_device("{ab73ad2f-6594-45a3-9063-8f72d365c5e5}", {
-      familyCode: 'A',
-      buttonCode: 1
+      familyCode: 'A'
     })
     
     # Intertechno Switch
@@ -24,7 +23,6 @@ describe Guh::Rule do
   end
   
   it "should create a new rule" do
-    # TODO: remove ugly workaround
     senderDeviceClass = Guh::Device.supported.detect{|d| d['id']==@sender['deviceClassId']}
     eventId = senderDeviceClass['events'].first['id']
     
@@ -48,7 +46,7 @@ describe Guh::Rule do
       # response = Guh::Rule.add(event, action)
     }.should_not raise_error
     
-    pending "How do we know we were successful?"
+    pending "TODO How do we know we were successful?"
     
   end
   

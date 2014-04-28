@@ -12,11 +12,11 @@ describe Guh::Action do
       channel3: false,
       channel4: false,
       channel5: false,
-      A: true,
-      B: false,
-      C: false,
-      D: false,
-      E: false
+      channel6: false,
+      channel7: false,
+      channel8: false,
+      channel9: false,
+      channel10: false
     })
     
     # Get all the possible actions for the device

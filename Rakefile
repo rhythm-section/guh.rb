@@ -10,6 +10,7 @@ end
 task :console do
   require 'irb'
   require 'irb/completion'
+  require 'pp'
   require 'guh'
   ARGV.clear
   IRB.start
