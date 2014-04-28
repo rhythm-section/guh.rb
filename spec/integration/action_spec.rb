@@ -1,6 +1,6 @@
 require 'helper'
 
-describe HiveRpcWrapper::Action do
+describe Guh::Action do
   
   before :all do
     # Elro Switch
@@ -20,7 +20,7 @@ describe HiveRpcWrapper::Action do
     })
     
     # Get all the possible actions for the device
-    actions = HiveRpcWrapper::ActionType.all(device_class_id)
+    actions = Guh::ActionType.all(device_class_id)
     
     # Just use the first action
     @action = actions.first
@@ -28,12 +28,12 @@ describe HiveRpcWrapper::Action do
   
   it "should execute a single action" do
     -> {
-      response = HiveRpcWrapper::Action.execute(@device['id'], @action['id'], {power: true})
+      response = Guh::Action.execute(@device['id'], @action['id'], {power: true})
     }.should_not raise_error
   end
   
   it 'should fail if the wrong params are provided' do
-    # response = HiveRpcWrapper::Action.execute(@device['id'], @action['id'], {})
+    # response = Guh::Action.execute(@device['id'], @action['id'], {})
     
     pending("Don't run this test until we know if the params are optional")
   end

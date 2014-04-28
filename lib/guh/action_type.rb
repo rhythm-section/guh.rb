@@ -1,4 +1,4 @@
-module HiveRpcWrapper
+module Guh
   ##
   # This class wraps everything related to ActionTypes.
   #
@@ -9,7 +9,7 @@ module HiveRpcWrapper
     #
     # Example:
     # 
-    #   HiveRpcWrapper::ActionType.all("{308ae6e6-38b3-4b3a-a513-3199da2764f8}")
+    #   Guh::ActionType.all("{308ae6e6-38b3-4b3a-a513-3199da2764f8}")
     # 
     def self.all(device_class_id)
       response = get({

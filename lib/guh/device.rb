@@ -1,4 +1,4 @@
-module HiveRpcWrapper
+module Guh
   ##
   # This class wraps everything related to Devices.
   #
@@ -10,7 +10,7 @@ module HiveRpcWrapper
     # 
     # Example:
     # 
-    #   HiveRpcWrapper::Device.configured
+    #   Guh::Device.configured
     # 
     def self.configured
       response = get({
@@ -27,7 +27,7 @@ module HiveRpcWrapper
     # 
     # Example:
     # 
-    #   HiveRpcWrapper::Device.supported
+    #   Guh::Device.supported
     # 
     def self.supported
       response = get({
@@ -44,7 +44,7 @@ module HiveRpcWrapper
     # 
     # Example for the "Elro Power Switch":
     # 
-    #   HiveRpcWrapper::Device.add("{308ae6e6-38b3-4b3a-a513-3199da2764f8}", {
+    #   Guh::Device.add("{308ae6e6-38b3-4b3a-a513-3199da2764f8}", {
     #     channel1: true,
     #     channel2: false,
     #     channel3: false,
@@ -72,7 +72,7 @@ module HiveRpcWrapper
     # 
     # Removes a configured device.
     # 
-    # Example: HiveRpcWrapper::Device.add("TODO find proper device_id")
+    # Example: Guh::Device.add("TODO find proper device_id")
     # 
     def self.remove(device_id)
       
@@ -82,7 +82,7 @@ module HiveRpcWrapper
     # 
     # Returns current number of configured devices
     # 
-    # Example: HiveRpcWrapper::Device.count_configured
+    # Example: Guh::Device.count_configured
     # 
     def self.count_configured
       self.configured.length

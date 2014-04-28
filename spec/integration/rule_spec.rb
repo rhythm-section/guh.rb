@@ -1,6 +1,6 @@
 require 'helper'
 
-describe HiveRpcWrapper::Rule do
+describe Guh::Rule do
   
   before :all do
     # Intertechno Remote
@@ -18,17 +18,17 @@ describe HiveRpcWrapper::Rule do
   end
   
   it "should return a list of all rules" do
-    response = HiveRpcWrapper::Rule.all
+    response = Guh::Rule.all
     
     response.should be_an_instance_of(Array)
   end
   
   it "should create a new rule" do
     # TODO: remove ugly workaround
-    senderDeviceClass = HiveRpcWrapper::Device.supported.detect{|d| d['id']==@sender['deviceClassId']}
+    senderDeviceClass = Guh::Device.supported.detect{|d| d['id']==@sender['deviceClassId']}
     eventId = senderDeviceClass['events'].first['id']
     
-    actionId = HiveRpcWrapper::ActionType.all(@receiver['deviceClassId']).first['id']
+    actionId = Guh::ActionType.all(@receiver['deviceClassId']).first['id']
     
     event = {
       eventTypeId: eventId,
@@ -45,7 +45,7 @@ describe HiveRpcWrapper::Rule do
     }
     
     -> {
-      response = HiveRpcWrapper::Rule.add(event, action)
+      # response = Guh::Rule.add(event, action)
     }.should_not raise_error
     
     pending "How do we know we were successful?"

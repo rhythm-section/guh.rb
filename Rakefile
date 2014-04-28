@@ -10,7 +10,7 @@ end
 task :console do
   require 'irb'
   require 'irb/completion'
-  require 'hive_rpc_wrapper'
+  require 'guh'
   ARGV.clear
   IRB.start
 end

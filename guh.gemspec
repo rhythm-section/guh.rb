@@ -1,13 +1,13 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'hive_rpc_wrapper/version'
+require 'guh/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "hive_rpc_wrapper"
-  spec.version       = HiveRpcWrapper::VERSION
+  spec.name          = "guh"
+  spec.version       = Guh::VERSION
   spec.authors       = ["Christoph Edthofer", "Thomas Esterer"]
-  spec.email         = ["christoph.edthofer@hiveyourhome.org", "thomas.esterer@hiveyourhome.org"]
+  spec.email         = ["christoph.edthofer@guh.guru", "thomas.esterer@guh.guru"]
   spec.summary       = %q{Write a short summary. Required.}
   spec.description   = %q{Write a longer description. Optional.}
   spec.homepage      = ""

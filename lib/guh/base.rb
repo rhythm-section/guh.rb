@@ -1,34 +1,34 @@
-module HiveRpcWrapper
+module Guh
   ##
   # The base class which all the specific wrapper classes inherit from. It provides some shared code to make development easier.
   # 
   class Base
     
-    # Getter/Setter for the hive_ip_address attribute
-    def self.hive_ip_address #:nodoc:
-      @@hive_ip_address 
+    # Getter/Setter for the guh_ip_address attribute
+    def self.guh_ip_address #:nodoc:
+      @@guh_ip_address 
     end
-    def self.hive_ip_address=(hia) #:nodoc:
-      @@hive_ip_address=hia
+    def self.guh_ip_address=(hia) #:nodoc:
+      @@guh_ip_address=hia
     end 
-    @@hive_ip_address = "127.0.0.1"
+    @@guh_ip_address = "127.0.0.1"
     
-    # Getter/Setter for the hive_port attribute
-    def self.hive_port #:nodoc: 
-       @@hive_port
+    # Getter/Setter for the guh_port attribute
+    def self.guh_port #:nodoc: 
+       @@guh_port
     end
-    def self.hive_port=(hia) #:nodoc:
-      @@hive_port=hia
+    def self.guh_port=(hia) #:nodoc:
+      @@guh_port=hia
     end
-    @@hive_port = 1234
+    @@guh_port = 1234
     
     ##
     # 
-    # Returns everything that is going on inside Hive Core
+    # Returns everything that is going on inside guh Core
     # 
     # Example:
     # 
-    #   HiveRpcWrapper::Base.introspect
+    #   Guh::Base.introspect
     # 
     def self.introspect
       get({
@@ -41,7 +41,7 @@ module HiveRpcWrapper
     # 
     # <b>Don't use this unless you know what you are doing!</b>
     # 
-    # Send a request to Hive Core and fetch the Response. This is a utility method used by the subclasses.
+    # Send a request to guh Core and fetch the Response. This is a utility method used by the subclasses.
     # 
     def self.get(request_hash)
       request_string = hash_to_json(request_hash)
@@ -56,7 +56,7 @@ module HiveRpcWrapper
       if response['status']=='success'
         return response['params']
       else
-        raise HiveRpcWrapper::ResponseError, "The Request was not successful"
+        raise Guh::ResponseError, "The Request was not successful"
       end
     end
     
@@ -65,14 +65,14 @@ module HiveRpcWrapper
     # Configuration DSL helper method.
     # 
     # The default values are: 
-    # * +hive_ip_address+: 127.0.0.1
-    # * +hive_port+: 1234
+    # * +guh_ip_address+: 127.0.0.1
+    # * +guh_port+: 1234
     # 
     # Example:
     # 
-    #   HiveRpcWrapper.configure do |config|
-    #     config.hive_ip_address = 10.0.0.1
-    #     config.hive_port = 6789
+    #   Guh.configure do |config|
+    #     config.guh_ip_address = 10.0.0.1
+    #     config.guh_port = 6789
     #   end
     # 
     def self.configure(&block)
@@ -86,7 +86,7 @@ module HiveRpcWrapper
     end
     
     def self.client(&block)
-      client = TCPSocket.open(@@hive_ip_address, @@hive_port)
+      client = TCPSocket.open(@@guh_ip_address, @@guh_port)
       connection_message = fetch_message(client)
       if connection_message['status']=='connected'
         yield client

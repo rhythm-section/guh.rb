@@ -1,4 +1,4 @@
-module HiveRpcWrapper
+module Guh
   ##
   # This class wraps everything related to EventTypes.
   # 
@@ -10,7 +10,7 @@ module HiveRpcWrapper
     # 
     # Example:
     # 
-    #   HiveRpcWrapper::EventType.all(device_class_id)
+    #   Guh::EventType.all(device_class_id)
     # 
     def self.all(device_class_id)
       response = get({

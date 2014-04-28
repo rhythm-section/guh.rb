@@ -1,9 +1,9 @@
 require 'helper'
 
-describe HiveRpcWrapper::Plugin do
+describe Guh::Plugin do
   
   it "should return a list of all loaded plugins" do
-    response = HiveRpcWrapper::Plugin.all
+    response = Guh::Plugin.all
     
     response.should be_an_instance_of(Array)
   end

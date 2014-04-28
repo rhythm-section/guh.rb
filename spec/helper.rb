@@ -1,31 +1,31 @@
 require 'rubygems'
 require 'rspec'
 
-require 'hive_rpc_wrapper'
+require 'guh'
 
 puts "\n\n---------------------------------------------------"
-puts "Please make sure that hive is running"
+puts "Please make sure that Guh is running"
 puts "---------------------------------------------------\n\n"
 
 RSpec.configure do |config|
   config.before(:all) do
-    HiveRpcWrapper::Base.configure do |c|
-      c.hive_ip_address = "0.0.0.0"
-      c.hive_port = 1234
+    Guh::Base.configure do |c|
+      c.guh_ip_address = "127.0.0.1"
+      c.guh_port = 1234
     end
     
-    # Remove all devices & rules from Hive Core
+    # Remove all devices & rules from Guh Core
     purge_configuration()
   end
 end
 
 def purge_devices
-  path = File.expand_path('~/.config/hiveyourhome/hive.conf')
+  path = File.expand_path('~/.config/guh/guh.conf')
   File.unlink(path) if File.exist?(path)
 end
 
 def purge_rules
-  path = File.expand_path('~/.config/hiveyourhome/rules.conf')
+  path = File.expand_path('~/.config/guh/rules.conf')
   File.unlink(path) if File.exist?(path)
 end
 
@@ -44,8 +44,8 @@ end
 
 def create_configured_device(device_class_id, params)
   # Create a device
-  response = HiveRpcWrapper::Device.add(device_class_id, params)
+  response = Guh::Device.add(device_class_id, params)
   
   # Get the newly configured device
-  return HiveRpcWrapper::Device.configured.detect{|d| d['deviceClassId']==device_class_id}
+  return Guh::Device.configured.detect{|d| d['deviceClassId']==device_class_id}
 end

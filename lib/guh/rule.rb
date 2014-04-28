@@ -1,4 +1,4 @@
-module HiveRpcWrapper
+module Guh
   ##
   # This class wraps everything related to Rules.
   # 
@@ -10,7 +10,7 @@ module HiveRpcWrapper
     # 
     # Example:
     # 
-    #   HiveRpcWrapper::Rule.all
+    #   Guh::Rule.all
     # 
     def self.all
       response = get({
@@ -27,7 +27,7 @@ module HiveRpcWrapper
     # 
     # Example:
     # 
-    #   HiveRpcWrapper::Rule.add(event, action)
+    #   Guh::Rule.add(event, action)
     # 
     def self.add(event, actions)
       unless actions.is_a?(Array)
@@ -48,7 +48,7 @@ module HiveRpcWrapper
     # 
     # Example:
     # 
-    #   HiveRpcWrapper::Rule.remove(rule_id)
+    #   Guh::Rule.remove(rule_id)
     # 
     def self.remove(rule_id)
       
