@@ -99,8 +99,6 @@ module Guh
       # else
       #   # TODO raise connection error
       # end
-    ensure
-      client.close if client
     end
     
     def self.fetch_message(client)
