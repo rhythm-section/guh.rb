@@ -2,10 +2,20 @@ require 'helper'
 
 describe Guh::Device do
   
-  it "should get the supported device" do
+  it "should get the supported devices" do
     response = Guh::Device.supported
     
     response.should be_an_instance_of(Array)
+  end
+  
+  it "should get the supported devices of a specific vendor" do
+    response = Guh::Vendor.supported
+    
+    vendor_id = response['vendors'].first['id']
+    
+    device = Guh::Device.supported(vendor_id: vendor_id)
+    
+    pending "TODO check if the returned devices match our vendor_id"
   end
   
   it "should get the configured device" do

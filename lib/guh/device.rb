@@ -28,11 +28,19 @@ module Guh
     # Example:
     # 
     #   Guh::Device.supported
+    #   # => a list of all supported devices
     # 
-    def self.supported
+    #   Guh::Device.supported("{2062d64d-3232-433c-88bc-0d33c0ba2ba6}")
+    #   # => a list of all supported devices of a specific vendor
+    # 
+    def self.supported(options={})
+      params = {}
+      params['vendorId'] = options['vendor_id'] unless options['vendor_id'].nil?
+      
       response = get({
         id: generate_request_id,
-        method: "Devices.GetSupportedDevices"
+        method: "Devices.GetSupportedDevices",
+        params: params
       })
       
       return response['deviceClasses']
@@ -66,10 +74,10 @@ module Guh
           deviceParams: params
         }
       })
-      if response['success']==false
-        raise Guh::ArgumentError, response['errorMessage']
-      else
+      if response['success']==true
         return response['deviceId']
+      else
+        raise Guh::ArgumentError, response['errorMessage']
       end
     end
     
