@@ -33,9 +33,10 @@ describe Guh::Action do
   end
   
   it 'should fail if the wrong params are provided' do
-    # response = Guh::Action.execute(@device['id'], @action['id'], {})
     
-    pending("Don't run this test until we know if the params are optional")
+    -> {
+      response = Guh::Action.execute(@device['id'], @action['id'], {})
+    }.should raise_error
   end
   
 end
