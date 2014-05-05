@@ -13,10 +13,12 @@ module Guh
     #   Guh::Vendor.all
     # 
     def self.all
-      get({
+      response = get({
         id: generate_request_id,
         method: "Devices.GetSupportedVendors"
       })
+      
+      return response['vendors']
     end
     
   end
