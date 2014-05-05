@@ -6,7 +6,7 @@ describe Guh::Vendor do
     
     response = Guh::Vendor.all
     
-    response['vendors'].length.should be > 0
+    response.length.should be > 0
     
   end
   

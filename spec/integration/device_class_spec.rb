@@ -24,7 +24,7 @@ describe Guh::DeviceClass do
   it "should get the supported devices of a specific vendor" do
     response = Guh::Vendor.all
     
-    vendor_id = response['vendors'].first['id']
+    vendor_id = response.first['id']
     
     devices = Guh::DeviceClass.all(vendor_id: vendor_id)
     
