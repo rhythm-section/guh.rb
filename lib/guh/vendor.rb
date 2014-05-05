@@ -10,9 +10,9 @@ module Guh
     # 
     # Example:
     # 
-    #   Guh::Vendor.supported
+    #   Guh::Vendor.all
     # 
-    def self.supported
+    def self.all
       get({
         id: generate_request_id,
         method: "Devices.GetSupportedVendors"

@@ -23,7 +23,7 @@ describe Guh::Rule do
   end
   
   it "should create a new rule" do
-    senderDeviceClass = Guh::Device.supported.detect{|d| d['id']==@sender['deviceClassId']}
+    senderDeviceClass = Guh::DeviceClass.all.detect{|d| d['id']==@sender['deviceClassId']}
     eventId = senderDeviceClass['events'].first['id']
     
     actionId = Guh::ActionType.all(@receiver['deviceClassId']).first['id']
