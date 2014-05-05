@@ -90,13 +90,10 @@ module Guh
       
       connection_message = fetch_message(client)
       
-      # TODO check status after the core guys commented on issue #4
+      # TODO check guh-core version and raise error if incompatible with this gem's version
+      # TODO look for timeout or connection refused errors
+      
       yield client
-      # if connection_message['status']=='connected'
-      #   yield client
-      # else
-      #   raise ConnectionError
-      # end
     end
     
     def self.fetch_message(client)
