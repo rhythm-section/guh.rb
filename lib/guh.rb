@@ -16,6 +16,7 @@ require "guh/vendor"
 module Guh
   # Your code goes here...
   
+  class ConnectionError < Exception; end
   class ResponseError < Exception; end
   class ArgumentError < Exception; end
   

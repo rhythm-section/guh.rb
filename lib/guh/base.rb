@@ -88,16 +88,14 @@ module Guh
     def self.client(&block)
       client = TCPSocket.open(@@guh_ip_address, @@guh_port)
       
-      # workaround until we get the welcome message back
-      yield client
+      connection_message = fetch_message(client)
       
-      # connection_message = fetch_message(client)
-      # 
+      # TODO check status after the core guys commented on issue #4
+      yield client
       # if connection_message['status']=='connected'
-      #   
       #   yield client
       # else
-      #   # TODO raise connection error
+      #   raise ConnectionError
       # end
     end
     
