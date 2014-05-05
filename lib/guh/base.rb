@@ -114,6 +114,34 @@ module Guh
       return JSON::parse(message)
     end
     
+    ##
+    #
+    # Converts a regular hash into a list of hashes.
+    # 
+    # Example: 
+    # 
+    # convert_map_to_list_of_maps({
+    #   power: true,
+    #   pin: 1,
+    #   family_code: 'A'
+    # })
+    #
+    # Returns: 
+    # 
+    # [
+    #   {power: true},
+    #   {pin: 1},
+    #   {family_code: 'A'}
+    # ]
+    # 
+    def self.convert_map_to_list_of_maps(map)
+      list = []
+      map.each do |key, value|
+        list << {key => value}
+      end
+      return list
+    end
+    
     def self.hash_to_json(hash)
       JSON::dump(hash) + "\n"
     end

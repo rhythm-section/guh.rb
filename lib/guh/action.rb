@@ -19,7 +19,7 @@ module Guh
         params: {
           deviceId: device_id,
           actionTypeId: action_type_id,
-          params: params
+          params: convert_map_to_list_of_maps(params)
         }
       })
       
