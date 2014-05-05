@@ -132,10 +132,15 @@ module Guh
     # ]
     # 
     def self.convert_map_to_list_of_maps(map)
+      # make sure we have an array to work with
+      map ||= []
+      
+      # do the conversion work
       list = []
       map.each do |key, value|
         list << {key => value}
       end
+      
       return list
     end
     
