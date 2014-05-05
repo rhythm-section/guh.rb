@@ -9,7 +9,16 @@ describe Guh::DeviceClass do
   end
   
   it "should find a specific DeviceClass" do
-    pending
+    device_class_id = "{ab73ad2f-6594-45a3-9063-8f72d365c5e5}"
+    
+    -> {
+      Guh::DeviceClass.find("bogus")
+    }.should raise_error
+    
+    -> {
+      device_class = Guh::DeviceClass.find(device_class_id)
+      device_class['id'].should eq(device_class_id)
+    }.should_not raise_error
   end
   
   it "should get the supported devices of a specific vendor" do

@@ -36,16 +36,12 @@ module Guh
     #   # => a list of all supported devices of a specific vendor
     # 
     def self.find(id)
-      params = {deviceClassId: id}
+      device_classes = self.all
       
-      response = get({
-        id: generate_request_id,
-        method: "Devices.GetSupportedDevices",
-        params: params
-      })
+      device_class = device_classes.detect{|dc| dc['id']==id}
       
-      if response['deviceClasses'].length > 0
-        response['deviceClasses'].first
+      if device_class
+        return device_class
       else
         raise DeviceClassNotFound, "Could not find a DeviceClass with the id #{id}"
       end
