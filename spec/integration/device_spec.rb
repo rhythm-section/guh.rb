@@ -45,4 +45,20 @@ describe Guh::Device do
     Guh::Device.count.should eq(configured_count)
   end
   
+  it "should create a new device, return its ID and remove it successfully" do
+    device_id = Guh::Device.add("{ab73ad2f-6594-45a3-9063-8f72d365c5e5}", {familyCode: 'A'})
+    
+    device_id.should match(/^\{[a-z0-9\-]+\}$/i)
+    
+    Guh::Device.remove(device_id).should be_true
+    
+    Guh::Device.find(device_id).should be_nil
+  end
+  
+  it "should raise an error if we try to delete a non-existing device" do
+    -> {
+      Guh::Device.remove("abc").should
+    }.should raise_error
+  end
+  
 end

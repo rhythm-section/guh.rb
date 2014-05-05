@@ -4,6 +4,15 @@ module Guh
   #
   class Device < Base
     
+    
+    ##
+    #
+    def self.find(id)
+      device = self.all.detect{|d| d['id']==id}
+      
+      return device
+    end
+    
     ##
     # 
     # Returns a list of all configured Devices.
@@ -60,10 +69,25 @@ module Guh
     # 
     # Removes a configured device.
     # 
-    # Example: Guh::Device.add("TODO find proper device_id")
+    # Example:
+    #
+    #   device_id = Guh::Device.add("{ab73ad2f-6594-45a3-9063-8f72d365c5e5}", {familyCode: 'A'})
+    #   
+    #   Guh::Device.remove(device_id)
     # 
     def self.remove(device_id)
-      
+      response = get({
+        id: generate_request_id,
+        method: "Devices.RemoveConfiguredDevice",
+        params: {
+          deviceId: device_id
+        }
+      })
+      if response['success']==true
+        return true
+      else
+        raise Guh::ResponseError, response['errorMessage']
+      end
     end
     
     ##
