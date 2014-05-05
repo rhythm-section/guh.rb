@@ -33,4 +33,16 @@ describe Guh::DeviceClass do
     end
   end
   
+  it "should discover the openweathermap" do
+    
+    device_class_id = "{985195aa-17ad-4530-88a4-cdd753d747d7}"
+    
+    pending "TODO wait until issue #13 is fixed"
+    
+    # device_descriptors = Guh::DeviceClass.discover(device_class_id, location: '')
+    
+    # puts device_descriptors.inspect
+    
+  end
+  
 end
