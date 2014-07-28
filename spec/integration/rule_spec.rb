@@ -45,13 +45,8 @@ describe Guh::Rule do
       ]
     }
 
-    puts '-' * 80
-    puts Guh::Rule.add(event, action).inspect
-    puts '-' * 80
-
     -> {
       response = Guh::Rule.add(event, action)
-      puts response.inspect
     }.should_not raise_error
 
     pending "TODO How do we know we were successful?"

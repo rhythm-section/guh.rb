@@ -42,10 +42,6 @@ describe Guh::DeviceClass do
     # device_descriptors = Guh::DeviceClass.discover(device_class_id, [
     #   {name: 'location', value: ''}
     # ])
-    #
-    # puts "--"
-    # puts device_descriptors.inspect
-    # puts "--"
 
   end
 
