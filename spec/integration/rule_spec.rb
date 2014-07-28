@@ -1,53 +1,61 @@
 require 'helper'
 
 describe Guh::Rule do
-  
+
   before :all do
     # Intertechno Remote
-    @sender = create_configured_device("{ab73ad2f-6594-45a3-9063-8f72d365c5e5}", {
-      familyCode: 'A'
-    })
-    
+    @sender = create_configured_device("{ab73ad2f-6594-45a3-9063-8f72d365c5e5}", [
+      {name: 'familyCode', value: 'A'}
+    ])
+
     # Intertechno Switch
-    @receiver = create_configured_device("{324219e8-7c53-41b5-b314-c2900cd15252}", {
-      familyCode: 'A',
-      buttonCode: 1
-    })
-    
+    @receiver = create_configured_device("{324219e8-7c53-41b5-b314-c2900cd15252}", [
+      {name: 'familyCode', value: 'A'},
+      {name: 'buttonCode', value: 1}
+    ])
+
   end
-  
+
   it "should return a list of all rules" do
     response = Guh::Rule.all
-    
+
     response.should be_an_instance_of(Array)
   end
-  
+
   it "should create a new rule" do
     senderDeviceClass = Guh::DeviceClass.all.detect{|d| d['id']==@sender['deviceClassId']}
-    eventId = senderDeviceClass['events'].first['id']
-    
+
+    eventTypeId = senderDeviceClass['eventTypes'].first['id']
+
     actionId = Guh::ActionType.all(@receiver['deviceClassId']).first['id']
-    
+
     event = {
-      eventTypeId: eventId,
+      eventTypeId: eventTypeId,
       deviceId: @sender['id'],
-      params: {inRange: true}
+      params: [
+        {name: 'inRange', value: true}
+      ]
     }
-    
+
     action = {
       actionTypeId: actionId,
       deviceId: @receiver['id'],
-      params: {
-        power: true
-      }
+      params: [
+        {name: 'power', value: true}
+      ]
     }
-    
+
+    puts '-' * 80
+    puts Guh::Rule.add(event, action).inspect
+    puts '-' * 80
+
     -> {
-      # response = Guh::Rule.add(event, action)
+      response = Guh::Rule.add(event, action)
+      puts response.inspect
     }.should_not raise_error
-    
+
     pending "TODO How do we know we were successful?"
-    
+
   end
-  
+
 end
