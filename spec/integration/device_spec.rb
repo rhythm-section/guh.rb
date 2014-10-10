@@ -19,15 +19,15 @@ describe Guh::Device do
 
     -> {
       response = Guh::Device.add("{308ae6e6-38b3-4b3a-a513-3199da2764f8}", [
-        {name: 'channel1',  value: true},
-        {name: 'channel2',  value: false},
-        {name: 'channel3',  value: false},
-        {name: 'channel4',  value: false},
-        {name: 'channel5',  value: false},
-        {name: 'A',  value: false},
-        {name: 'B',  value: false},
-        {name: 'C',  value: false},
-        {name: 'D',  value: false},
+        {name: 'channel1', value: true},
+        {name: 'channel2', value: false},
+        {name: 'channel3', value: false},
+        {name: 'channel4', value: false},
+        {name: 'channel5', value: false},
+        {name: 'A', value: false},
+        {name: 'B', value: false},
+        {name: 'C', value: false},
+        {name: 'D', value: false},
         {name: 'E', value: false}
       ])
     }.should_not raise_error
@@ -50,7 +50,7 @@ describe Guh::Device do
 
     device_id.should match(/^\{[a-z0-9\-]+\}$/i)
 
-    Guh::Device.remove(device_id).should be_true
+    Guh::Device.remove(device_id).should be_truthy
 
     Guh::Device.find(device_id).should be_nil
   end
@@ -59,6 +59,14 @@ describe Guh::Device do
     -> {
       Guh::Device.remove("abc").should
     }.should raise_error
+  end
+
+  it "should discover the openweathermap" do
+    device_class_id = "{985195aa-17ad-4530-88a4-cdd753d747d7}"
+
+    device_descriptors = Guh::Device.discover(device_class_id, [{name: 'location', value: 'Salzburg'}])
+
+    response = Guh::Device.add(device_class_id, {descriptorId: device_descriptors.first['id']})
   end
 
 end

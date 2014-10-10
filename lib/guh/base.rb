@@ -70,7 +70,7 @@ module Guh
     #
     # Example:
     #
-    #   Guh.configure do |config|
+    #   Guh::Base.configure do |config|
     #     config.guh_ip_address = 10.0.0.1
     #     config.guh_port = 6789
     #   end

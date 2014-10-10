@@ -47,24 +47,5 @@ module Guh
       end
     end
 
-    ##
-    #
-    def self.discover(id, options={})
-      params = {deviceClassId: id}
-      params['discoveryParams'] = options
-
-      response = get({
-        id: generate_request_id,
-        method: "Devices.GetDiscoveredDevices",
-        params: params
-      })
-
-      if response['success']
-        return response['deviceDescriptors']
-      else
-        raise ResponseError, response['errorMessage']
-      end
-    end
-
   end
 end

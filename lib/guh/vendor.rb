@@ -3,6 +3,17 @@ module Guh
   # This class wraps everything related to Vendors.
   #
   class Vendor < Base
+    ##
+    #
+    # Retrieves a specific vendor
+    #
+    # Example:
+    #
+    #   Guh::Vendor.find('{b241f7f5-8153-4a72-b260-f62beadc2d19}')
+    #
+    def self.find(vendor_id)
+      all.detect { |vendor| vendor['id'] == vendor_id }
+    end
 
     ##
     #
