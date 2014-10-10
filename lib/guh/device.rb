@@ -95,7 +95,7 @@ module Guh
       when 'CreateMethodUser'
         add_configured_device(device_class_id, params)
       when 'CreateMethodDiscovery'
-        add_discovered_device(device_class_id, params[:descriptorId])
+        add_discovered_device(device_class_id, params['descriptorId'])
       when 'CreateMethodAuto'
         # Nothing to do here
         # TODO should we raise an exception?

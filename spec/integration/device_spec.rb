@@ -66,7 +66,7 @@ describe Guh::Device do
 
     device_descriptors = Guh::Device.discover(device_class_id, [{name: 'location', value: 'Salzburg'}])
 
-    response = Guh::Device.add(device_class_id, {descriptorId: device_descriptors.first['id']})
+    response = Guh::Device.add(device_class_id, {'descriptorId' => device_descriptors.first['id']})
   end
 
 end

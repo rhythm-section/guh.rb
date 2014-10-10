@@ -9,7 +9,7 @@ RSpec.configure do |config|
 
   config.before(:all) do
     Guh::Base.configure do |c|
-      c.guh_ip_address = "127.0.0.1"
+      c.guh_ip_address = '192.168.178.31'
       c.guh_port = 1234
     end
 
