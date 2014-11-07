@@ -23,7 +23,7 @@ module Guh
         }
       })
 
-      if response['success']==true
+      if response['success'] == 'success'
         return response
       else
         raise Guh::ArgumentError, response['errorMessage']

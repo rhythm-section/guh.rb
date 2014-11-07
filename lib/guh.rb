@@ -20,5 +20,6 @@ module Guh
   class ConnectionError < Exception; end
   class ResponseError < Exception; end
   class ArgumentError < Exception; end
+  class DeviceClassNotFound < Exception; end
 
 end

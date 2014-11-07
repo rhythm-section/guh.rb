@@ -48,7 +48,7 @@ module Guh
     #
     #   Guh::Device.discover("{985195aa-17ad-4530-88a4-cdd753d747d7}", [{name: 'location', value: 'Salzburg'}])
     #
-    def self.discover(device_class_id, discovery_params = {})
+    def self.discover(device_class_id, discovery_params = [])
       response = get({
         id: generate_request_id,
         method: "Devices.GetDiscoveredDevices",
@@ -58,7 +58,7 @@ module Guh
         }
       })
 
-      if response['success'] == true
+      if response['success'] == 'success'
         return response['deviceDescriptors']
       else
         raise Guh::ResponseError, response['errorMessage']
@@ -117,7 +117,7 @@ module Guh
         }
       })
 
-      if response['success']==true
+      if response['success'] == 'success'
         return response
       else
         raise Guh::ArgumentError, response['errorMessage']
@@ -142,7 +142,7 @@ module Guh
           deviceId: device_id
         }
       })
-      if response['success']==true
+      if response['success'] == 'success'
         return true
       else
         raise Guh::ResponseError, response['errorMessage']
@@ -171,7 +171,7 @@ module Guh
         }
       })
 
-      if response['success']==true
+      if response['success'] == 'success'
         return response['deviceId']
       else
         raise Guh::ArgumentError, response['errorMessage']
@@ -198,7 +198,7 @@ module Guh
         }
       })
 
-      if response['success']==true
+      if response['success'] == 'success'
         return response['deviceId']
       else
         raise Guh::ArgumentError, response['errorMessage']
@@ -215,7 +215,7 @@ module Guh
         }
       })
 
-      if response['success']==true
+      if response['success'] == 'success'
         return response
       else
         raise Guh::ArgumentError, response['errorMessage']
