@@ -71,7 +71,7 @@ module Guh
     #
     # Example for the "Elro Power Switch":
     #
-    #   Guh::Device.add("{308ae6e6-38b3-4b3a-a513-3199da2764f8}", {
+    #   Guh::Device.add("{308ae6e6-38b3-4b3a-a513-3199da2764f8}", nil, {
     #     channel1: true,
     #     channel2: false,
     #     channel3: false,
@@ -86,15 +86,15 @@ module Guh
     #
     # To create a discovered device you have to provide a descriptor ID in the params:
     #
-    #   Guh::Device.add("{985195aa-17ad-4530-88a4-cdd753d747d7}", {deviceDescriptorId: "{727a4a9a-c187-446f-aadf-f1b2220607d1}"})
+    #   Guh::Device.add("{985195aa-17ad-4530-88a4-cdd753d747d7}", "{727a4a9a-c187-446f-aadf-f1b2220607d1}")
     #
-    def self.add(device_class_id, params)
+    def self.add(device_class_id, device_descriptor_id = nil, params = [])
       device_class = Guh::DeviceClass.find(device_class_id)
 
       if device_class['createMethods'].include? 'CreateMethodUser'
         add_configured_device(device_class_id, params)
       elsif device_class['createMethods'].include? 'CreateMethodDiscovery'
-        add_discovered_device(device_class_id, params.delete('deviceDescriptorId'), params)
+        add_discovered_device(device_class_id, device_descriptor_id, params)
       elsif device_class['createMethods'].include? 'CreateMethodAuto'
         # Nothing to do here
         # TODO should we raise an exception?
@@ -129,7 +129,7 @@ module Guh
     #
     # Example:
     #
-    #   device_id = Guh::Device.add("{ab73ad2f-6594-45a3-9063-8f72d365c5e5}", {familyCode: 'A'})
+    #   device_id = Guh::Device.add("{ab73ad2f-6594-45a3-9063-8f72d365c5e5}", nil, [{name: 'familyCode', value: 'A'}])
     #
     #   Guh::Device.remove(device_id)
     #
