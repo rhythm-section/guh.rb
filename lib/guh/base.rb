@@ -53,7 +53,7 @@ module Guh
         response = fetch_message(c)
       end
 
-      if response['status']=='success'
+      if response['status'] == 'success'
         return response['params']
       else
         raise Guh::ResponseError, "The Request was not successful"

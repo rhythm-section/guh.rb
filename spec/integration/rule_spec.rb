@@ -11,7 +11,7 @@ describe Guh::Rule do
     # Intertechno Switch
     @receiver = create_configured_device("{324219e8-7c53-41b5-b314-c2900cd15252}", [
       {name: 'familyCode', value: 'A'},
-      {name: 'buttonCode', value: 1}
+      {name: 'button', value: 1}
     ])
 
   end

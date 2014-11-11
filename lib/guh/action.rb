@@ -23,10 +23,10 @@ module Guh
         }
       })
 
-      if response['success'] == 'success'
+      if response['deviceError'] == 'DeviceErrorNoError'
         return response
       else
-        raise Guh::ArgumentError, response['errorMessage']
+        raise Guh::DeviceError, response['deviceError']
       end
     end
 

@@ -58,10 +58,10 @@ module Guh
         }
       })
 
-      if response['success'] == 'success'
+      if response['deviceError'] == 'DeviceErrorNoError'
         return response['deviceDescriptors']
       else
-        raise Guh::ResponseError, response['errorMessage']
+        raise Guh::DeviceError, response['deviceError']
       end
     end
 
@@ -86,17 +86,16 @@ module Guh
     #
     # To create a discovered device you have to provide a descriptor ID in the params:
     #
-    #   Guh::Device.add("{985195aa-17ad-4530-88a4-cdd753d747d7}", {descriptorId: "{727a4a9a-c187-446f-aadf-f1b2220607d1}"})
+    #   Guh::Device.add("{985195aa-17ad-4530-88a4-cdd753d747d7}", {deviceDescriptorId: "{727a4a9a-c187-446f-aadf-f1b2220607d1}"})
     #
     def self.add(device_class_id, params)
       device_class = Guh::DeviceClass.find(device_class_id)
 
-      case device_class['createMethod']
-      when 'CreateMethodUser'
+      if device_class['createMethods'].include? 'CreateMethodUser'
         add_configured_device(device_class_id, params)
-      when 'CreateMethodDiscovery'
-        add_discovered_device(device_class_id, params['descriptorId'])
-      when 'CreateMethodAuto'
+      elsif device_class['createMethods'].include? 'CreateMethodDiscovery'
+        add_discovered_device(device_class_id, params.delete('deviceDescriptorId'), params)
+      elsif device_class['createMethods'].include? 'CreateMethodAuto'
         # Nothing to do here
         # TODO should we raise an exception?
       end
@@ -117,10 +116,10 @@ module Guh
         }
       })
 
-      if response['success'] == 'success'
+      if response['deviceError'] == 'DeviceErrorNoError'
         return response
       else
-        raise Guh::ArgumentError, response['errorMessage']
+        raise Guh::DeviceError, response['deviceError']
       end
     end
 
@@ -142,10 +141,10 @@ module Guh
           deviceId: device_id
         }
       })
-      if response['success'] == 'success'
+      if response['deviceError'] == 'DeviceErrorNoError'
         return true
       else
-        raise Guh::ResponseError, response['errorMessage']
+        raise Guh::DeviceError, response['deviceError']
       end
     end
 
@@ -171,54 +170,56 @@ module Guh
         }
       })
 
-      if response['success'] == 'success'
+      if response['deviceError'] == 'DeviceErrorNoError'
         return response['deviceId']
       else
-        raise Guh::ArgumentError, response['errorMessage']
+        raise Guh::DeviceError, response['deviceError']
       end
     end
 
-    def self.add_discovered_device(device_class_id, descriptor_id)
+    def self.add_discovered_device(device_class_id, descriptor_id, params = [])
       device_class = Guh::DeviceClass.find(device_class_id)
 
       if device_class['setupMethod'] == 'SetupMethodJustAdd'
-        add_discovered_device_just_add(device_class_id, descriptor_id)
+        add_discovered_device_just_add(device_class_id, descriptor_id, params)
       else
-        add_discovered_device_pair(device_class_id, descriptor_id)
+        add_discovered_device_pair(device_class_id, descriptor_id, params)
       end
     end
 
-    def self.add_discovered_device_just_add(device_class_id, descriptor_id)
+    def self.add_discovered_device_just_add(device_class_id, device_descriptor_id, params = [])
       response = get({
         id: generate_request_id,
         method: "Devices.AddConfiguredDevice",
         params: {
           deviceClassId: device_class_id,
-          deviceDescriptorId: descriptor_id
+          deviceDescriptorId: device_descriptor_id,
+          deviceParams: params
         }
       })
 
-      if response['success'] == 'success'
+      if response['deviceError'] == 'DeviceErrorNoError'
         return response['deviceId']
       else
-        raise Guh::ArgumentError, response['errorMessage']
+        raise Guh::DeviceError, response['deviceError']
       end
     end
 
-    def self.add_discovered_device_pair(device_class_id, descriptor_id)
+    def self.add_discovered_device_pair(device_class_id, descriptor_id, params = [])
       response = get({
         id: generate_request_id,
         method: "Devices.PairDevice",
         params: {
           deviceClassId: device_class_id,
-          deviceDescriptorId: descriptor_id
+          deviceDescriptorId: descriptor_id,
+          deviceParams: params
         }
       })
 
-      if response['success'] == 'success'
+      if response['deviceError'] == 'DeviceErrorNoError'
         return response
       else
-        raise Guh::ArgumentError, response['errorMessage']
+        raise Guh::DeviceError, response['deviceError']
       end
     end
 

@@ -7,11 +7,11 @@ describe Guh::Action do
     device_class_id = "{308ae6e6-38b3-4b3a-a513-3199da2764f8}"
 
     @device = create_configured_device(device_class_id, [
-      {name: 'channel1',  value: true},
-      {name: 'channel2',  value: false},
-      {name: 'channel3',  value: false},
-      {name: 'channel4',  value: false},
-      {name: 'channel5',  value: false},
+      {name: 'channel 1',  value: true},
+      {name: 'channel 2',  value: false},
+      {name: 'channel 3',  value: false},
+      {name: 'channel 4',  value: false},
+      {name: 'channel 5',  value: false},
       {name: 'A',  value: false},
       {name: 'B',  value: false},
       {name: 'C',  value: false},
@@ -27,9 +27,10 @@ describe Guh::Action do
   end
 
   it "should execute a single action" do
-    -> {
-      response = Guh::Action.execute(@device['id'], @action['id'], [{name: 'power', value: true}])
-    }.should_not raise_error
+    pending "Find another device to test this"
+    # -> {
+    #   response = Guh::Action.execute(@device['id'], @action['id'], [{name: 'power', value: true}])
+    # }.should_not raise_error
   end
 
   it 'should fail if the wrong params are provided' do
