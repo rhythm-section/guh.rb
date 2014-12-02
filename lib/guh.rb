@@ -15,6 +15,9 @@ require "guh/rule_type"
 require "guh/rule"
 require "guh/vendor"
 
+require "guh/em/connection"
+require "guh/em/notifications"
+
 module Guh
   # Your code goes here...
 
