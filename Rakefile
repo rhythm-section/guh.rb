@@ -14,8 +14,8 @@ task :console do
   require 'guh'
 
   Guh::Base.configure do |c|
-    c.guh_ip_address = '192.168.178.31'
-    c.guh_port = 1234
+    c.guh_ip_address = ENV['GUH_IP']
+    c.guh_port = ENV['GUH_PORT']
   end
 
   ARGV.clear
