@@ -11,6 +11,7 @@ require "guh/device_class"
 require "guh/event_type"
 require "guh/event"
 require "guh/plugin"
+require "guh/rule_type"
 require "guh/rule"
 require "guh/vendor"
 

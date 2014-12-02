@@ -27,20 +27,13 @@ module Guh
     #
     # Example:
     #
-    #   Guh::Rule.add(event, action)
+    #   Guh::Rule.add(params)
     #
-    def self.add(event_descriptor_list, actions)
-      unless actions.is_a?(Array)
-        actions = [actions]
-      end
-
+    def self.add(params)
       get({
         id: generate_request_id,
         method: "Rules.AddRule",
-        params: {
-          eventDescriptorList: event_descriptor_list,
-          actions: actions
-        }
+        params: params
       })
     end
 
