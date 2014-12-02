@@ -4,6 +4,14 @@ module Guh
   #
   class Rule < Base
 
+    def self.find(rule_id)
+      response = get({
+        id: generate_request_id,
+        method: "Rules.GetRuleDetails",
+        params: { ruleId: rule_id }
+      })
+    end
+
     ##
     #
     # Returns a list of all Rules.
@@ -46,7 +54,11 @@ module Guh
     #   Guh::Rule.remove(rule_id)
     #
     def self.remove(rule_id)
-
+      get({
+        id: generate_request_id,
+        method: "Rules.RemoveRule",
+        params: { ruleId: rule_id }
+      })
     end
 
   end
