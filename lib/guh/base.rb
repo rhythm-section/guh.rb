@@ -56,7 +56,7 @@ module Guh
       if response['status'] == 'success'
         return response['params']
       else
-        raise Guh::ResponseError, "The Request was not successful"
+        raise Guh::ResponseError, "The Request was not successful: #{response['error']}"
       end
     end
 
