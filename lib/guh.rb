@@ -15,6 +15,9 @@ require "guh/rule_type"
 require "guh/rule"
 require "guh/vendor"
 
+require "guh/type/state_operator"
+require "guh/type/value_operator"
+
 require "guh/em/connection"
 require "guh/em/notifications"
 
