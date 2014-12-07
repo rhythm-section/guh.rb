@@ -37,6 +37,13 @@ module Guh
       })
     end
 
+    def self.version
+      get({
+        id: generate_request_id,
+        method: "JSONRPC.Version",
+      })
+    end
+
     ##
     #
     # <b>Don't use this unless you know what you are doing!</b>

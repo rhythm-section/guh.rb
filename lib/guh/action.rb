@@ -6,6 +6,42 @@ module Guh
 
     ##
     #
+    # Example:
+    #   Guh::ActionType.find("{cfbc6504-d86f-4856-8dfa-97b6fbb385e4}")
+    #
+    def self.find(action_type_id)
+      response = get({
+        id: generate_request_id,
+        method: "Actions.GetActionType",
+        params: {
+          actionTypeId: action_type_id
+        }
+      })
+
+      response['actionType']
+    end
+
+    ##
+    # Retrieves all known ActionTypes for a specific Device identified by its +device_class_id+.
+    #
+    # Example:
+    #
+    #   Guh::ActionType.all("{308ae6e6-38b3-4b3a-a513-3199da2764f8}")
+    #
+    def self.all(device_class_id)
+      response = get({
+        id: generate_request_id,
+        method: "Devices.GetActionTypes",
+        params: {
+          deviceClassId: device_class_id
+        }
+      })
+
+      response['actionTypes']
+    end
+
+    ##
+    #
     # Executes a specific Action on a specific Device.
     #
     # To activate an "Elro Power Switch":

@@ -4,7 +4,6 @@ require 'json'
 require 'socket'
 
 require "guh/base"
-require "guh/action_type"
 require "guh/action"
 require "guh/device"
 require "guh/device_class"
@@ -13,6 +12,9 @@ require "guh/event"
 require "guh/plugin"
 require "guh/rule_type"
 require "guh/rule"
+require "guh/state_type"
+require "guh/state"
+
 require "guh/vendor"
 
 require "guh/type/state_operator"
