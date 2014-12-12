@@ -10,6 +10,8 @@ module Guh
         method: "Rules.GetRuleDetails",
         params: { ruleId: rule_id }
       })
+
+      response['rule']
     end
 
     ##
